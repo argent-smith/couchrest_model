@@ -66,6 +66,10 @@ module CouchRest
         new? ? nil : [id]
       end
 
+      def to_partial_path
+        self.class._to_partial_path
+      end
+
       alias :to_param :id
       alias :new_record? :new?
       alias :new_document? :new?
@@ -88,6 +92,20 @@ module CouchRest
         end
       end
       alias :eql? :==
+
+      # Class methods
+      class << self
+        # Provide a class level cache for the to_path. This is an
+        # internal method and should not be accessed directly. Borrowed
+        # directly from ActiveModel code, thanks to all authors.
+        def _to_partial_path #:nodoc:
+          @_to_partial_path ||= begin
+                                  element = ActiveSupport::Inflector.underscore(ActiveSupport::Inflector.demodulize(self))
+                                  collection = ActiveSupport::Inflector.tableize(self)
+                                  "#{collection}/#{element}".freeze
+                                end
+        end
+      end
 
     end
   end
