@@ -33,11 +33,16 @@ describe "Dirty" do
 
   describe "changes" do
 
-    it "should return changes on an attribute" do
+    it "should return changes between last saved and current values of attributes" do
       @card = Card.new(:first_name => "matt")
       @card.first_name = "andrew"
       @card.first_name_changed?.should be_true
-      @card.changes.should == { "first_name" => ["matt", "andrew"] }
+      @card.changes.should == { "first_name" => [nil, "andrew"] }
+      @card.save
+      @card.first_name = "pavel"
+      @card.first_name_changed?.should be_true
+      @card.changes.should == { "first_name" => ["andrew", "pavel"] }
+      @card.destroy
     end
 
   end
