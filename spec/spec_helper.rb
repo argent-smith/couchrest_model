@@ -14,7 +14,7 @@ unless defined?(FIXTURE_PATH)
   FIXTURE_PATH = File.join(File.dirname(__FILE__), '/fixtures')
   SCRATCH_PATH = File.join(File.dirname(__FILE__), '/tmp')
 
-  COUCHHOST = "https://couchresttest:user414142@127.0.0.1:6984"
+  COUCHHOST = "https://couchresttest:user414142@paul.rtelekom.ru:6984"
   TESTDB    = 'couchrest-model-test'
   TEST_SERVER    = CouchRest.new COUCHHOST
   TEST_SERVER.default_database = TESTDB
