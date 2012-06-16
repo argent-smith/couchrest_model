@@ -27,7 +27,7 @@ describe CouchRest::Model::Proxyable do
     end
 
     it "should provide proxy database from method" do
-      @class.stub!(:proxy_database_method).twice.and_return(:slug)
+      @class.stub!(:proxy_database_method).and_return(:slug)
       @obj.proxy_database.should be_a(CouchRest::Database)
       @obj.proxy_database.name.should eql('couchrest_proxy')
     end
